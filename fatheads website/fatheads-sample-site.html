@@ -321,6 +321,9 @@
       align-items: center;
       justify-content: center;
       background-color: #0a0a0a;
+      background-image: url('https://fatheads.com/wp-content/uploads/2024/01/crew-photo-1600x894.jpg');
+      background-size: cover;
+      background-position: center;
       position: relative;
       overflow: hidden;
       padding: 3rem 0;
@@ -333,9 +336,21 @@
       left: 0;
       width: 100%;
       height: 100%;
+      background: linear-gradient(to bottom, rgba(10,10,10,0.55) 0%, rgba(10,10,10,0.75) 50%, rgba(10,10,10,0.95) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       background-image: url('https://fatheads.com/wp-content/themes/fatheads/images/bg/noise-dark.png');
       pointer-events: none;
-      opacity: 0.3;
+      opacity: 0.2;
       z-index: 1;
     }
 
@@ -350,161 +365,60 @@
       font-size: clamp(3rem, 8vw, 5rem);
       margin-bottom: 0.5rem;
       color: #ffffff;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.6);
     }
 
     .hero-subtitle {
       font-size: clamp(1.2rem, 3vw, 1.8rem);
-      margin-bottom: 3rem;
+      margin-bottom: 2rem;
       color: #ED8B49;
       font-family: "usual", sans-serif;
       text-transform: none;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
     }
 
-    /* Floating beer cans */
-    .floating-cans {
-      position: relative;
-      width: 100%;
-      height: 400px;
-      margin-bottom: 3rem;
-      perspective: 1000px;
-    }
-
-    .can {
-      position: absolute;
-      width: 180px;
-      height: auto;
-      filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.5));
-      animation: bobbing 4s ease-in-out infinite;
-    }
-
-    .can:nth-child(1) {
-      left: 10%;
-      top: 50px;
-      animation-delay: 0s;
-    }
-
-    .can:nth-child(2) {
-      left: 50%;
-      transform: translateX(-50%);
-      top: 0;
-      animation-delay: 1s;
-      width: 220px;
-    }
-
-    .can:nth-child(3) {
-      right: 10%;
-      top: 80px;
-      animation-delay: 0.5s;
-    }
-
-    @keyframes bobbing {
-      0%, 100% {
-        transform: translateY(0px);
-      }
-      50% {
-        transform: translateY(-40px);
-      }
-    }
-
-    /* GABF Badge */
-    .gabf-badge {
-      position: absolute;
-      top: 40px;
-      right: 40px;
-      width: 120px;
-      height: 120px;
-      background: linear-gradient(135deg, #FFD700, #FFA500);
-      border-radius: 50%;
+    /* Beer cans — static, inline, floating look */
+    .hero-cans {
       display: flex;
-      flex-direction: column;
-      align-items: center;
       justify-content: center;
-      text-align: center;
-      box-shadow: 0 8px 24px rgba(255, 215, 0, 0.3);
-      z-index: 10;
-      border: 3px solid #FFF;
+      align-items: flex-end;
+      gap: 1rem;
+      margin-top: 1rem;
+      padding: 0 1rem;
     }
 
-    .gabf-badge-year {
-      font-family: "specter", sans-serif;
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #0a0a0a;
-      line-height: 1;
+    .hero-cans img {
+      width: 160px;
+      height: auto;
+      filter: drop-shadow(0 12px 30px rgba(0,0,0,0.6));
+      transition: transform 0.3s ease;
     }
 
-    .gabf-badge-text {
-      font-family: "usual", sans-serif;
-      font-size: 0.65rem;
-      color: #0a0a0a;
-      font-weight: bold;
-      margin-top: 4px;
-      text-transform: uppercase;
+    .hero-cans img:nth-child(2) {
+      width: 190px;
+      margin-bottom: 10px;
+    }
+
+    .hero-cans img:hover {
+      transform: translateY(-8px);
     }
 
     @media (max-width: 768px) {
-      .gabf-badge {
-        width: 90px;
-        height: 90px;
-        top: 20px;
-        right: 20px;
+      .hero-cans img {
+        width: 100px;
       }
-
-      .gabf-badge-year {
-        font-size: 1.1rem;
-      }
-
-      .gabf-badge-text {
-        font-size: 0.55rem;
+      .hero-cans img:nth-child(2) {
+        width: 120px;
       }
     }
 
-    /* Featured Beer Cards */
-    .hero-featured {
-      margin-top: 4rem;
-      text-align: center;
-    }
-
-    .hero-featured h3 {
-      margin-bottom: 2rem;
-      color: #ED8B49;
-    }
-
-    .featured-beers {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 2rem;
-      margin-top: 2rem;
-    }
-
-    .beer-card {
-      background-color: #121212;
-      border: 1px solid rgba(237, 139, 73, 0.3);
-      padding: 1.5rem;
-      text-align: center;
-      transition: all 0.3s ease;
-    }
-
-    .beer-card:hover {
-      border-color: #ED8B49;
-      box-shadow: 0 8px 24px rgba(237, 139, 73, 0.2);
-    }
-
-    .beer-card img {
-      width: 120px;
-      height: auto;
-      margin: 0 auto 1rem;
-    }
-
-    .beer-card h4 {
-      margin-bottom: 0.5rem;
-      color: #ED8B49;
-    }
-
-    .beer-card p {
-      font-size: 0.9rem;
-      color: #aaaaaa;
-      margin-bottom: 1rem;
+    @media (max-width: 480px) {
+      .hero-cans img {
+        width: 80px;
+      }
+      .hero-cans img:nth-child(2) {
+        width: 100px;
+      }
     }
 
     /* ====== PROMO SECTION ====== */
@@ -1207,17 +1121,6 @@
         padding-left: 1.5rem;
       }
 
-      .floating-cans {
-        height: 300px;
-      }
-
-      .can {
-        width: 140px;
-      }
-
-      .can:nth-child(2) {
-        width: 170px;
-      }
     }
 
     @media (max-width: 768px) {
@@ -1260,27 +1163,6 @@
       .hero {
         min-height: 80vh;
         padding: 2rem 0;
-      }
-
-      .floating-cans {
-        height: 250px;
-        margin-bottom: 2rem;
-      }
-
-      .can {
-        width: 110px;
-      }
-
-      .can:nth-child(2) {
-        width: 130px;
-      }
-
-      .hero-featured {
-        margin-top: 2rem;
-      }
-
-      .featured-beers {
-        grid-template-columns: 1fr;
       }
 
       .promo-grid {
@@ -1356,40 +1238,13 @@
 
   <!-- ====== HERO SECTION ====== -->
   <section class="hero" id="home">
-    <div class="gabf-badge">
-      <div class="gabf-badge-year">2025</div>
-      <div class="gabf-badge-text">Brewery<br>of the<br>Year</div>
-    </div>
-
     <div class="hero-content">
       <h1>FAT HEAD'S BREWERY</h1>
       <p class="hero-subtitle">Chill out man, have a beer!</p>
-
-      <div class="floating-cans">
-        <img src="https://fatheads.com/wp-content/uploads/2024/01/HeadHunter_Can_Main.png" alt="Head Hunter IPA" class="can">
-        <img src="https://fatheads.com/wp-content/uploads/2026/02/HazyHeadHunter_Can.png" alt="Hazy Head Hunter" class="can">
-        <img src="https://fatheads.com/wp-content/uploads/2024/01/bumble-berry.png" alt="Bumble Berry" class="can">
-      </div>
-
-      <div class="hero-featured">
-        <h3>Featured Beers</h3>
-        <div class="featured-beers">
-          <div class="beer-card">
-            <img src="https://fatheads.com/wp-content/uploads/2024/01/HeadHunter_Can_Main.png" alt="Head Hunter">
-            <h4>Head Hunter</h4>
-            <p>West Coast IPA</p>
-          </div>
-          <div class="beer-card">
-            <img src="https://fatheads.com/wp-content/uploads/2026/02/HazyHeadHunter_Can.png" alt="Hazy Head Hunter">
-            <h4>Hazy Head Hunter</h4>
-            <p>New England IPA</p>
-          </div>
-          <div class="beer-card">
-            <img src="https://fatheads.com/wp-content/uploads/2024/01/bumble-berry.png" alt="Bumble Berry">
-            <h4>Bumble Berry</h4>
-            <p>Fruit Beer</p>
-          </div>
-        </div>
+      <div class="hero-cans">
+        <img src="https://fatheads.com/wp-content/uploads/2024/01/HeadHunter_Can_Main.png" alt="Head Hunter IPA">
+        <img src="https://fatheads.com/wp-content/uploads/2026/02/HazyHeadHunter_Can.png" alt="Hazy Head Hunter">
+        <img src="https://fatheads.com/wp-content/uploads/2024/01/bumble-berry.png" alt="Bumble Berry">
       </div>
     </div>
   </section>
@@ -1400,7 +1255,7 @@
       <h2>Our Latest & Greatest</h2>
       <div class="promo-grid">
         <div class="promo-card">
-          <img src="https://fatheads.com/wp-content/uploads/2025/10/GABF2025-BOTY-banner-800x800.png" alt="GABF 2025 Brewery of the Year">
+          <img src="https://fatheads.com/wp-content/uploads/2025/10/GABF2025-BOTY-banner.png" alt="GABF 2025 Brewery of the Year">
           <div class="promo-card-content">
             <h3>GABF 2025</h3>
             <p>We're honored to be named Brewery of the Year at the 2025 Great American Beer Festival. This award represents our commitment to excellence in every beer we brew.</p>
@@ -1437,7 +1292,7 @@
       <div class="location-grid">
         <div class="location-card">
           <div class="location-card-image">
-            <img src="https://fatheads.com/wp-content/uploads/2024/01/location-banner-mbh.jpg" alt="Middleburg Heights Location">
+            <img src="https://fatheads.com/wp-content/uploads/sites/2/2024/01/002-visit-MBH-background-image-1-1600x1067.jpg" alt="Middleburg Heights Location">
             <div class="location-card-overlay">
               <img src="https://fatheads.com/wp-content/uploads/sites/2/2024/02/logo-fatheads.png" alt="Middleburg Heights" class="location-logo">
             </div>
@@ -1511,7 +1366,7 @@
         <a href="#" class="btn btn-dark">See How We Brew</a>
       </div>
       <div class="brewing-image">
-        <img src="https://fatheads.com/wp-content/uploads/2024/01/about-brewing-process-800x1067.jpg" alt="Brewing Process">
+        <img src="https://fatheads.com/wp-content/uploads/2024/01/cta-brewer.webp" alt="Brewing Process">
       </div>
     </div>
   </section>
@@ -1520,7 +1375,7 @@
   <section class="crew">
     <div class="container crew-container">
       <div class="crew-image">
-        <img src="https://fatheads.com/wp-content/uploads/2024/01/about-crew-fatheads-1-800x533.jpg" alt="Fat Head's Crew">
+        <img src="https://fatheads.com/wp-content/uploads/2024/01/crew-photo-1600x894.jpg" alt="Fat Head's Crew">
       </div>
       <div class="crew-content">
         <div class="eyebrow">Look at This Big Hoppy Family!</div>
@@ -1549,21 +1404,21 @@
       </div>
       <div class="events-grid">
         <div class="event-card">
-          <img src="https://fatheads.com/wp-content/uploads/2024/01/trivia-800x534.jpg" alt="Trivia Night">
+          <img src="https://fatheads.com/wp-content/uploads/2024/01/trivia.jpg" alt="Trivia Night">
           <div class="event-card-content">
             <h3>Trivia Night</h3>
             <p>Every Tuesday night, test your knowledge and compete for prizes. Free to play, drinks on special pricing.</p>
           </div>
         </div>
         <div class="event-card">
-          <img src="https://fatheads.com/wp-content/uploads/2025/02/mugclub-raffle-800x534.jpg" alt="Mug Club Raffle">
+          <img src="https://fatheads.com/wp-content/uploads/2025/02/mugclub-raffle.jpg" alt="Mug Club Raffle">
           <div class="event-card-content">
             <h3>Mug Club Raffle</h3>
             <p>Join the Mug Club and get exclusive access to limited releases and special events throughout the year.</p>
           </div>
         </div>
         <div class="event-card">
-          <img src="https://fatheads.com/wp-content/uploads/2025/10/GABF2025-medals-banner-800x800.png" alt="Seasonal Releases">
+          <img src="https://fatheads.com/wp-content/uploads/2025/10/GABF2025-awards-banner.png" alt="Seasonal Releases">
           <div class="event-card-content">
             <h3>Seasonal Releases</h3>
             <p>Experience our award-winning seasonal beers as they debut. Limited availability, so don't miss out.</p>
@@ -1595,7 +1450,7 @@
       <div class="footer-top">
         <div>
           <img src="https://fatheads.com/wp-content/uploads/sites/2/2024/02/logo-fatheads.png" alt="Fat Head's Brewery" class="footer-logo">
-          <img src="https://fatheads.com/wp-content/themes/fatheads/images/ohio-craft-brewers-badge-white.png" alt="Ohio Craft Brewers Association" class="footer-badge">
+
           <div class="footer-social">
             <a href="https://instagram.com/fatheadsbrewery" target="_blank" title="Instagram">📷</a>
             <a href="https://facebook.com/fatheadsbrewery" target="_blank" title="Facebook">f</a>
@@ -1667,7 +1522,7 @@
     "name": "Fat Head's Brewery",
     "url": "https://fatheads.com",
     "logo": "https://fatheads.com/wp-content/uploads/sites/2/2024/02/logo-fatheads.png",
-    "image": "https://fatheads.com/wp-content/uploads/2024/01/about-crew-fatheads-1-800x533.jpg",
+    "image": "https://fatheads.com/wp-content/uploads/2024/01/crew-photo-1600x894.jpg",
     "description": "Award-winning craft brewery with beer halls in Ohio and Pittsburgh. GABF Brewery of the Year 2025.",
     "address": {
       "@type": "PostalAddress",
