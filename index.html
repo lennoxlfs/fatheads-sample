@@ -365,33 +365,21 @@
 
     .hero h1 {
       font-size: clamp(3rem, 8vw, 5rem);
-      margin-bottom: 0.5rem;
+      margin-bottom: 0;
       color: #ffffff;
       text-shadow: 0 4px 20px rgba(0,0,0,0.6);
     }
 
-    .hero-subtitle {
-      font-size: clamp(1.2rem, 3vw, 1.8rem);
-      margin-bottom: 2rem;
-      color: #ED8B49;
-      font-family: "usual", sans-serif;
-      text-transform: none;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-    }
-
-    /* Featured beers label */
-    .hero-featured-label {
+    .hero-featured-heading {
       position: relative;
       z-index: 4;
       text-align: center;
-      margin-top: 3rem;
-    }
-
-    .hero-featured-label .eyebrow {
-      color: #ED8B49;
-      font-size: 1rem;
-      letter-spacing: 0.2em;
-      opacity: 1;
+      margin-top: 2.5rem;
+      margin-bottom: 0.5rem;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      color: #ffffff;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.6);
+      letter-spacing: 0.04em;
     }
 
     /* Hero cans -- big flippable cards, overlap into next section */
@@ -1712,12 +1700,9 @@
   <!-- ====== HERO SECTION ====== -->
   <section class="hero" id="home">
     <div class="hero-content">
-      <h1>FAT HEAD'S BREWERY</h1>
-      <p class="hero-subtitle">Chill out man, have a beer!</p>
+      <h1>Chill Out Man, Have a Beer</h1>
     </div>
-    <div class="hero-featured-label">
-      <div class="eyebrow">Featured Beers</div>
-    </div>
+    <h2 class="hero-featured-heading">Featured Beers</h2>
     <div class="hero-cans">
       <div class="hero-can-flip">
         <div class="hero-can-inner">
