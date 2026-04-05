@@ -378,7 +378,7 @@
       text-shadow: 0 2px 10px rgba(0,0,0,0.5);
     }
 
-    /* Beer cans — static, inline, floating look */
+    /* Beer cans â static, inline, floating look */
     .hero-cans {
       display: flex;
       justify-content: center;
@@ -1325,7 +1325,7 @@
           </div>
           <div class="location-card-content">
             <h3>Middleburg Heights</h3>
-            <div class="location-status">Open • 11am - Midnight</div>
+            <div class="location-status">Open â¢ 11am - Midnight</div>
             <p>Our original location. Full menu, 50+ taps, arcade games, and the vibes.</p>
             <a href="#" class="btn btn-orange">Visit Location</a>
           </div>
@@ -1340,7 +1340,7 @@
           </div>
           <div class="location-card-content">
             <h3>North Olmsted</h3>
-            <div class="location-status">Open • 11am - Midnight</div>
+            <div class="location-status">Open â¢ 11am - Midnight</div>
             <p>Beer hall with full kitchen, 60+ craft beers, and great food.</p>
             <a href="#" class="btn btn-orange">Visit Location</a>
           </div>
@@ -1355,7 +1355,7 @@
           </div>
           <div class="location-card-content">
             <h3>Canton</h3>
-            <div class="location-status">Open • 11am - 11pm</div>
+            <div class="location-status">Open â¢ 11am - 11pm</div>
             <p>Our newest location in Canton. Full brewery experience with stunning views.</p>
             <a href="#" class="btn btn-orange">Visit Location</a>
           </div>
@@ -1370,14 +1370,14 @@
           </div>
           <div class="location-card-content">
             <h3>Pittsburgh</h3>
-            <div class="location-status">Open • 11am - Midnight</div>
+            <div class="location-status">Open â¢ 11am - Midnight</div>
             <p>Bringing Ohio's best beer to Pennsylvania. Full menu and daily specials.</p>
             <a href="#" class="btn btn-orange">Visit Location</a>
           </div>
         </div>
       </div>
       <div class="locations-all">
-        <a href="#">View All Locations & Hours →</a>
+        <a href="#">View All Locations & Hours â</a>
       </div>
     </div>
   </section>
@@ -1452,7 +1452,7 @@
         </div>
       </div>
       <div class="events-all">
-        <a href="#">View All Events →</a>
+        <a href="#">View All Events â</a>
       </div>
     </div>
   </section>
@@ -1478,10 +1478,10 @@
           <img src="https://fatheads.com/wp-content/uploads/sites/2/2024/02/logo-fatheads.png" alt="Fat Head's Brewery" class="footer-logo">
 
           <div class="footer-social">
-            <a href="https://instagram.com/fatheadsbrewery" target="_blank" title="Instagram">📷</a>
+            <a href="https://instagram.com/fatheadsbrewery" target="_blank" title="Instagram">ð·</a>
             <a href="https://facebook.com/fatheadsbrewery" target="_blank" title="Facebook">f</a>
-            <a href="https://twitter.com/fatheadsbrewery" target="_blank" title="Twitter">𝕏</a>
-            <a href="https://tiktok.com/@fatheadsbrewery" target="_blank" title="TikTok">♫</a>
+            <a href="https://twitter.com/fatheadsbrewery" target="_blank" title="Twitter">ð</a>
+            <a href="https://tiktok.com/@fatheadsbrewery" target="_blank" title="TikTok">â«</a>
           </div>
         </div>
 
@@ -1626,11 +1626,46 @@
     // Initialize
     
     function initScrollAnimations() {
-      const els = document.querySelectorAll('[data-animate], [data-stagger]');
-      const obs = new IntersectionObserver((entries) => {
-        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-visible'); obs.unobserve(e.target); } });
-      }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
-      els.forEach(el => obs.observe(el));
+      var animatedEls = document.querySelectorAll('[data-animate], [data-stagger]');
+      
+      function revealIfVisible(el) {
+        var rect = el.getBoundingClientRect();
+        var windowH = window.innerHeight || document.documentElement.clientHeight;
+        if (rect.top < windowH - 50 && rect.bottom > 0) {
+          el.classList.add('is-visible');
+          return true;
+        }
+        return false;
+      }
+
+      var remaining = [];
+      animatedEls.forEach(function(el) {
+        if (!revealIfVisible(el)) remaining.push(el);
+      });
+
+      if ('IntersectionObserver' in window && remaining.length > 0) {
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+        remaining.forEach(function(el) { observer.observe(el); });
+      }
+
+      window.addEventListener('scroll', function scrollReveal() {
+        var unrevealed = document.querySelectorAll('[data-animate]:not(.is-visible), [data-stagger]:not(.is-visible)');
+        if (unrevealed.length === 0) { window.removeEventListener('scroll', scrollReveal); return; }
+        unrevealed.forEach(function(el) { revealIfVisible(el); });
+      }, { passive: true });
+
+      setTimeout(function() {
+        document.querySelectorAll('[data-animate]:not(.is-visible), [data-stagger]:not(.is-visible)').forEach(function(el) {
+          el.classList.add('is-visible');
+        });
+      }, 3000);
     }
     function initHeaderScroll() {
       const h = document.querySelector('header'); if(!h) return;
