@@ -221,6 +221,7 @@
       width: 100%;
       background-color: #0a0a0a;
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
       z-index: 1000;
     }
 
@@ -378,7 +379,7 @@
       text-shadow: 0 2px 10px rgba(0,0,0,0.5);
     }
 
-    /* Beer cans Ã¢ÂÂ static, inline, floating look */
+    /* Beer cans ÃÂ¢ÃÂÃÂ static, inline, floating look */
     .hero-cans {
       display: flex;
       justify-content: center;
@@ -980,6 +981,266 @@
     }
 
 
+
+    /* ====== OUR BEERS SECTION ====== */
+    .our-beers {
+      background-color: #0a0a0a;
+      padding: 6rem 0 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .our-beers::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: radial-gradient(ellipse at 50% 0%, rgba(237,139,73,0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .beers-header {
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .beers-header .eyebrow { color: #ED8B49; }
+
+    .beers-scroll-track {
+      position: relative;
+      z-index: 2;
+      overflow: visible;
+      padding: 2rem 0 4rem;
+    }
+
+    .beers-scroll-inner {
+      display: flex;
+      gap: 3rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .beer-card-flip {
+      width: 220px;
+      height: 380px;
+      perspective: 1000px;
+      cursor: pointer;
+    }
+
+    .beer-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      transform-style: preserve-3d;
+    }
+
+    .beer-card-flip:hover .beer-card-inner,
+    .beer-card-flip.is-flipped .beer-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .beer-card-front, .beer-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .beer-card-front {
+      background: linear-gradient(145deg, #1a1a1a 0%, #0d0d0d 100%);
+      border: 1px solid rgba(237,139,73,0.15);
+      padding: 1.5rem;
+    }
+
+    .beer-card-front img {
+      height: 220px;
+      width: auto;
+      filter: drop-shadow(0 20px 40px rgba(0,0,0,0.5));
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
+    }
+
+    .beer-card-flip:hover .beer-card-front img {
+      transform: translateY(-12px) scale(1.05);
+      filter: drop-shadow(0 30px 50px rgba(237,139,73,0.3));
+    }
+
+    .beer-card-front h4 {
+      margin-top: 1rem;
+      font-size: 1rem;
+      color: #ffffff;
+      text-align: center;
+    }
+
+    .beer-card-front .beer-style {
+      font-size: 0.75rem;
+      color: #ED8B49;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-family: "specter", sans-serif;
+      margin-top: 0.3rem;
+    }
+
+    .beer-card-back {
+      background: linear-gradient(145deg, #ED8B49 0%, #d4713a 100%);
+      transform: rotateY(180deg);
+      padding: 2rem 1.5rem;
+      text-align: center;
+    }
+
+    .beer-card-back h4 {
+      font-size: 1.1rem;
+      color: #0a0a0a;
+      margin-bottom: 0.5rem;
+    }
+
+    .beer-card-back .beer-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+      margin: 1rem 0;
+      width: 100%;
+    }
+
+    .beer-stat {
+      background: rgba(0,0,0,0.15);
+      border-radius: 8px;
+      padding: 0.5rem;
+    }
+
+    .beer-stat .label {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(10,10,10,0.7);
+      font-family: "specter", sans-serif;
+    }
+
+    .beer-stat .value {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #0a0a0a;
+      font-family: "specter", sans-serif;
+    }
+
+    .beer-card-back p {
+      font-size: 0.85rem;
+      color: rgba(10,10,10,0.85);
+      line-height: 1.5;
+    }
+
+    .beer-card-back .flip-hint {
+      font-size: 0.7rem;
+      color: rgba(10,10,10,0.5);
+      margin-top: auto;
+      font-family: "specter", sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    @media (max-width: 768px) {
+      .beers-scroll-inner { gap: 1.5rem; }
+      .beer-card-flip { width: 160px; height: 300px; }
+      .beer-card-front img { height: 160px; }
+    }
+
+    /* ====== FLOATING CANS (PARALLAX BETWEEN SECTIONS) ====== */
+    .floating-can-layer {
+      position: absolute;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+      width: 100%; height: 100%;
+      top: 0; left: 0;
+    }
+
+    .float-can {
+      position: absolute;
+      opacity: 0.08;
+      filter: blur(1px);
+      transition: transform 0.1s linear;
+      will-change: transform;
+    }
+
+    .float-can img { height: 200px; width: auto; }
+    .float-can.can-lg img { height: 280px; }
+    .float-can.can-sm img { height: 140px; }
+
+    /* ====== SECTION DIVIDERS ====== */
+    .section-divider {
+      height: 120px;
+      position: relative;
+      overflow: hidden;
+      background: #0a0a0a;
+    }
+
+    .section-divider .divider-cans {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4rem;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 1s ease, transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateY(30px);
+    }
+
+    .section-divider.is-visible .divider-cans {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section-divider .divider-cans img {
+      height: 100px;
+      width: auto;
+      filter: drop-shadow(0 10px 20px rgba(0,0,0,0.4));
+      opacity: 0.2;
+    }
+
+    .section-divider .divider-line {
+      position: absolute;
+      top: 50%; left: 0;
+      width: 100%; height: 1px;
+      background: linear-gradient(to right, transparent 0%, rgba(237,139,73,0.3) 50%, transparent 100%);
+    }
+
+    /* ====== SMOOTH COUNTER ANIMATION ====== */
+    .stats-bar {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      padding: 2rem 0;
+      flex-wrap: wrap;
+    }
+
+    .stat-item { text-align: center; min-width: 120px; }
+
+    .stat-number {
+      font-family: "specter", sans-serif;
+      font-size: 2.5rem;
+      color: #ED8B49;
+      font-weight: bold;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.5);
+      margin-top: 0.3rem;
+      font-family: "specter", sans-serif;
+    }
+
     /* ====== SCROLL ANIMATIONS ====== */
     [data-animate] { opacity: 0; transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
     [data-animate="fade-up"] { transform: translateY(60px); }
@@ -1239,7 +1500,7 @@
         </div>
         <nav id="mainNav">
           <ul id="navMenu">
-            <li><a href="#beer">Beer</a></li>
+            <li><a href="#beers">Our Beers</a></li>
             <li><a href="#locations">Visit</a></li>
             <li><a href="#about">About Us</a></li>
             <li><a href="#events">Outreach</a></li>
@@ -1308,6 +1569,131 @@
     </div>
   </section>
 
+
+  <!-- ====== OUR BEERS SECTION ====== -->
+  <section class="our-beers" id="beers">
+    <div class="floating-can-layer" aria-hidden="true">
+      <div class="float-can can-lg" style="top: 10%; left: -5%; transform: rotate(-15deg);">
+        <img src="https://fatheads.com/wp-content/uploads/2024/01/HeadHunter_Can_Main.png" alt="">
+      </div>
+      <div class="float-can can-sm" style="top: 60%; right: -3%; transform: rotate(20deg);">
+        <img src="https://fatheads.com/wp-content/uploads/2024/01/bumble-berry.png" alt="">
+      </div>
+    </div>
+    <div class="container">
+      <div class="beers-header" data-animate="fade-up">
+        <div class="eyebrow">Award-Winning Craft Beer</div>
+        <h2>Our Beers</h2>
+        <p style="color: rgba(255,255,255,0.6); max-width: 500px; margin: 1rem auto 0;">Hover to explore each brew. Handcrafted with obsession.</p>
+      </div>
+      <div class="beers-scroll-track">
+        <div class="beers-scroll-inner" data-stagger>
+          <div class="beer-card-flip">
+            <div class="beer-card-inner">
+              <div class="beer-card-front">
+                <img src="https://fatheads.com/wp-content/uploads/2024/01/HeadHunter_Can_Main.png" alt="Head Hunter IPA">
+                <h4>Head Hunter</h4>
+                <div class="beer-style">IPA</div>
+              </div>
+              <div class="beer-card-back">
+                <h4>Head Hunter IPA</h4>
+                <div class="beer-stats">
+                  <div class="beer-stat"><div class="label">ABV</div><div class="value">7.5%</div></div>
+                  <div class="beer-stat"><div class="label">IBU</div><div class="value">87</div></div>
+                </div>
+                <p>Our flagship IPA. Hop-slammed with Simcoe, Centennial, and Columbus. GABF Gold Medal winner.</p>
+                <div class="flip-hint">Tap to flip back</div>
+              </div>
+            </div>
+          </div>
+          <div class="beer-card-flip">
+            <div class="beer-card-inner">
+              <div class="beer-card-front">
+                <img src="https://fatheads.com/wp-content/uploads/2026/02/HazyHeadHunter_Can.png" alt="Hazy Head Hunter">
+                <h4>Hazy Head Hunter</h4>
+                <div class="beer-style">Hazy IPA</div>
+              </div>
+              <div class="beer-card-back">
+                <h4>Hazy Head Hunter</h4>
+                <div class="beer-stats">
+                  <div class="beer-stat"><div class="label">ABV</div><div class="value">7.0%</div></div>
+                  <div class="beer-stat"><div class="label">IBU</div><div class="value">60</div></div>
+                </div>
+                <p>Juicy, hazy, and packed with our signature Head Hunter hop character. A tropical explosion.</p>
+                <div class="flip-hint">Tap to flip back</div>
+              </div>
+            </div>
+          </div>
+          <div class="beer-card-flip">
+            <div class="beer-card-inner">
+              <div class="beer-card-front">
+                <img src="https://fatheads.com/wp-content/uploads/2024/01/bumble-berry.png" alt="Bumble Berry">
+                <h4>Bumble Berry</h4>
+                <div class="beer-style">Blueberry Ale</div>
+              </div>
+              <div class="beer-card-back">
+                <h4>Bumble Berry</h4>
+                <div class="beer-stats">
+                  <div class="beer-stat"><div class="label">ABV</div><div class="value">5.3%</div></div>
+                  <div class="beer-stat"><div class="label">IBU</div><div class="value">13</div></div>
+                </div>
+                <p>Award-winning blueberry honey wheat ale. Smooth, refreshing, and bursting with berry flavor.</p>
+                <div class="flip-hint">Tap to flip back</div>
+              </div>
+            </div>
+          </div>
+          <div class="beer-card-flip">
+            <div class="beer-card-inner">
+              <div class="beer-card-front">
+                <img src="https://fatheads.com/wp-content/uploads/2024/01/bumble-berry-202x400.png" alt="Trail Head">
+                <h4>Trail Head</h4>
+                <div class="beer-style">Pale Ale</div>
+              </div>
+              <div class="beer-card-back">
+                <h4>Trail Head</h4>
+                <div class="beer-stats">
+                  <div class="beer-stat"><div class="label">ABV</div><div class="value">5.4%</div></div>
+                  <div class="beer-stat"><div class="label">IBU</div><div class="value">33</div></div>
+                </div>
+                <p>A smooth, easy-drinking pale ale with a crisp hop finish. The perfect session beer.</p>
+                <div class="flip-hint">Tap to flip back</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stats-bar" data-animate="fade-up">
+        <div class="stat-item">
+          <div class="stat-number" data-count="50">0</div>
+          <div class="stat-label">Beers on Tap</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" data-count="30">0</div>
+          <div class="stat-label">Awards Won</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" data-count="4">0</div>
+          <div class="stat-label">Locations</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" data-count="2009">0</div>
+          <div class="stat-label">Est.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== SECTION DIVIDER ====== -->
+  <div class="section-divider" data-animate="fade-in">
+    <div class="divider-line"></div>
+    <div class="divider-cans">
+      <img src="https://fatheads.com/wp-content/uploads/2024/01/HeadHunter_Can_Main.png" alt="" style="transform: rotate(-10deg);">
+      <img src="https://fatheads.com/wp-content/uploads/2026/02/HazyHeadHunter_Can.png" alt="" style="transform: rotate(5deg);">
+      <img src="https://fatheads.com/wp-content/uploads/2024/01/bumble-berry.png" alt="" style="transform: rotate(-8deg);">
+    </div>
+  </div>
+
   <!-- ====== LOCATIONS SECTION ====== -->
   <section class="locations" id="locations">
     <div class="container">
@@ -1325,7 +1711,7 @@
           </div>
           <div class="location-card-content">
             <h3>Middleburg Heights</h3>
-            <div class="location-status">Open Ã¢ÂÂ¢ 11am - Midnight</div>
+            <div class="location-status">Open ÃÂ¢ÃÂÃÂ¢ 11am - Midnight</div>
             <p>Our original location. Full menu, 50+ taps, arcade games, and the vibes.</p>
             <a href="#" class="btn btn-orange">Visit Location</a>
           </div>
@@ -1340,7 +1726,7 @@
           </div>
           <div class="location-card-content">
             <h3>North Olmsted</h3>
-            <div class="location-status">Open Ã¢ÂÂ¢ 11am - Midnight</div>
+            <div class="location-status">Open ÃÂ¢ÃÂÃÂ¢ 11am - Midnight</div>
             <p>Beer hall with full kitchen, 60+ craft beers, and great food.</p>
             <a href="#" class="btn btn-orange">Visit Location</a>
           </div>
@@ -1355,7 +1741,7 @@
           </div>
           <div class="location-card-content">
             <h3>Canton</h3>
-            <div class="location-status">Open Ã¢ÂÂ¢ 11am - 11pm</div>
+            <div class="location-status">Open ÃÂ¢ÃÂÃÂ¢ 11am - 11pm</div>
             <p>Our newest location in Canton. Full brewery experience with stunning views.</p>
             <a href="#" class="btn btn-orange">Visit Location</a>
           </div>
@@ -1370,14 +1756,14 @@
           </div>
           <div class="location-card-content">
             <h3>Pittsburgh</h3>
-            <div class="location-status">Open Ã¢ÂÂ¢ 11am - Midnight</div>
+            <div class="location-status">Open ÃÂ¢ÃÂÃÂ¢ 11am - Midnight</div>
             <p>Bringing Ohio's best beer to Pennsylvania. Full menu and daily specials.</p>
             <a href="#" class="btn btn-orange">Visit Location</a>
           </div>
         </div>
       </div>
       <div class="locations-all">
-        <a href="#">View All Locations & Hours Ã¢ÂÂ</a>
+        <a href="#">View All Locations & Hours ÃÂ¢ÃÂÃÂ</a>
       </div>
     </div>
   </section>
@@ -1396,6 +1782,16 @@
       </div>
     </div>
   </section>
+
+
+  <!-- ====== SECTION DIVIDER ====== -->
+  <div class="section-divider" data-animate="fade-in">
+    <div class="divider-line"></div>
+    <div class="divider-cans">
+      <img src="https://fatheads.com/wp-content/uploads/2024/01/bumble-berry.png" alt="" style="transform: rotate(12deg);">
+      <img src="https://fatheads.com/wp-content/uploads/2024/01/HeadHunter_Can_Main.png" alt="" style="transform: rotate(-6deg);">
+    </div>
+  </div>
 
   <!-- ====== CREW SECTION ====== -->
   <section class="crew">
@@ -1452,7 +1848,7 @@
         </div>
       </div>
       <div class="events-all">
-        <a href="#">View All Events Ã¢ÂÂ</a>
+        <a href="#">View All Events ÃÂ¢ÃÂÃÂ</a>
       </div>
     </div>
   </section>
@@ -1478,10 +1874,10 @@
           <img src="https://fatheads.com/wp-content/uploads/sites/2/2024/02/logo-fatheads.png" alt="Fat Head's Brewery" class="footer-logo">
 
           <div class="footer-social">
-            <a href="https://instagram.com/fatheadsbrewery" target="_blank" title="Instagram">Ã°ÂÂÂ·</a>
+            <a href="https://instagram.com/fatheadsbrewery" target="_blank" title="Instagram">ÃÂ°ÃÂÃÂÃÂ·</a>
             <a href="https://facebook.com/fatheadsbrewery" target="_blank" title="Facebook">f</a>
-            <a href="https://twitter.com/fatheadsbrewery" target="_blank" title="Twitter">Ã°ÂÂÂ</a>
-            <a href="https://tiktok.com/@fatheadsbrewery" target="_blank" title="TikTok">Ã¢ÂÂ«</a>
+            <a href="https://twitter.com/fatheadsbrewery" target="_blank" title="Twitter">ÃÂ°ÃÂÃÂÃÂ</a>
+            <a href="https://tiktok.com/@fatheadsbrewery" target="_blank" title="TikTok">ÃÂ¢ÃÂÃÂ«</a>
           </div>
         </div>
 
@@ -1623,6 +2019,80 @@
       event.target.reset();
     }
 
+
+    // ====== COUNTER ANIMATION ======
+    function initCounters() {
+      var counters = document.querySelectorAll('[data-count]');
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            var el = entry.target;
+            var target = parseInt(el.getAttribute('data-count'));
+            var duration = target > 100 ? 2000 : 1500;
+            var start = 0;
+            var startTime = null;
+            function animate(timestamp) {
+              if (!startTime) startTime = timestamp;
+              var progress = Math.min((timestamp - startTime) / duration, 1);
+              var eased = 1 - Math.pow(1 - progress, 3);
+              el.textContent = Math.floor(eased * target);
+              if (progress < 1) requestAnimationFrame(animate);
+              else el.textContent = target > 100 ? target.toLocaleString() : target;
+            }
+            requestAnimationFrame(animate);
+            observer.unobserve(el);
+          }
+        });
+      }, { threshold: 0.5 });
+      counters.forEach(function(c) { observer.observe(c); });
+    }
+
+    // ====== FLOATING CAN PARALLAX ======
+    function initFloatingCans() {
+      var cans = document.querySelectorAll('.float-can');
+      if (cans.length === 0) return;
+      var ticking = false;
+      window.addEventListener('scroll', function() {
+        if (!ticking) {
+          requestAnimationFrame(function() {
+            var scrollY = window.scrollY;
+            cans.forEach(function(can, i) {
+              var speed = 0.03 + (i * 0.02);
+              var rotate = Math.sin(scrollY * 0.002 + i) * 5;
+              can.style.transform = 'translateY(' + (scrollY * speed) + 'px) rotate(' + rotate + 'deg)';
+            });
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }, { passive: true });
+    }
+
+    // ====== BEER CARD FLIP (MOBILE TAP SUPPORT) ======
+    function initBeerCards() {
+      var cards = document.querySelectorAll('.beer-card-flip');
+      cards.forEach(function(card) {
+        card.addEventListener('click', function() {
+          cards.forEach(function(c) { if (c !== card) c.classList.remove('is-flipped'); });
+          card.classList.toggle('is-flipped');
+        });
+      });
+    }
+
+    // ====== SECTION DIVIDER REVEAL ======
+    function initDividers() {
+      var dividers = document.querySelectorAll('.section-divider');
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.3 });
+      dividers.forEach(function(d) { observer.observe(d); });
+    }
+
     // Initialize
     
     function initScrollAnimations() {
@@ -1680,6 +2150,10 @@
 
     document.addEventListener('DOMContentLoaded', () => {
       initScrollAnimations(); initHeaderScroll(); initHeroParallax();
+      initCounters();
+      initFloatingCans();
+      initBeerCards();
+      initDividers();
 
       checkAgeGate();
     });
