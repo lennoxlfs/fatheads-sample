@@ -371,6 +371,7 @@
       z-index: 2;
       text-align: center;
       max-width: 900px;
+      transition: opacity 0.15s ease, transform 0.15s ease;
     }
 
     .hero h1 {
@@ -404,7 +405,7 @@
       transform: translateY(0);
     }
 
-    /* Hero cans -- big flippable cards, overlap into next section */
+    /* Hero cans */
     .hero-cans {
       position: relative;
       z-index: 4;
@@ -412,8 +413,7 @@
       justify-content: center;
       align-items: flex-end;
       gap: 2rem;
-      margin-top: 1.5rem;
-      transform: translateY(50%);
+      margin-top: 0.5rem;
     }
 
     .hero-can-flip {
@@ -1154,7 +1154,7 @@
     /* ====== OUR BEERS SECTION ====== */
     .our-beers {
       background-color: #0a0a0a;
-      padding: 18rem 0 4rem;
+      padding: 3rem 0 4rem;
       position: relative;
       overflow: hidden;
     }
@@ -1723,7 +1723,7 @@
   <section class="hero" id="home">
     <div class="hero-bg"></div>
     <div class="hero-content">
-      <h1>Chill Out Man, <span class="hero-accent">Have a Beer</span></h1>
+      <h1>Chill Out Man, <span class="hero-accent">Have a Beer!</span></h1>
     </div>
     <h2 class="hero-featured-heading">Featured Beers</h2>
     <div class="hero-cans">
@@ -2337,22 +2337,37 @@
     // ====== HERO CAN FLIP ======
     function initHeroScroll() {
       var heroBg = document.querySelector('.hero-bg');
+      var heroContent = document.querySelector('.hero-content');
       var featuredHeading = document.querySelector('.hero-featured-heading');
       var hero = document.querySelector('.hero');
-      if (!heroBg || !featuredHeading || !hero) return;
+      if (!heroBg || !heroContent || !featuredHeading || !hero) return;
 
       window.addEventListener('scroll', function() {
         var scrollY = window.pageYOffset || document.documentElement.scrollTop;
-        var heroH = hero.offsetHeight;
-        var triggerPoint = heroH * 0.25;
+        var fadeStart = 80;
+        var fadeEnd = 350;
 
-        var fadeProgress = Math.min(scrollY / triggerPoint, 1);
-        heroBg.style.opacity = 1 - fadeProgress;
-
-        if (scrollY > triggerPoint * 0.5) {
+        if (scrollY <= fadeStart) {
+          heroBg.style.opacity = 1;
+          heroContent.style.opacity = 1;
+          heroContent.style.transform = 'scale(1) translateY(0)';
+          featuredHeading.classList.remove('is-visible');
+        } else if (scrollY >= fadeEnd) {
+          heroBg.style.opacity = 0;
+          heroContent.style.opacity = 0;
+          heroContent.style.transform = 'scale(0.92) translateY(-30px)';
           featuredHeading.classList.add('is-visible');
         } else {
-          featuredHeading.classList.remove('is-visible');
+          var progress = (scrollY - fadeStart) / (fadeEnd - fadeStart);
+          heroBg.style.opacity = 1 - progress;
+          heroContent.style.opacity = 1 - progress;
+          var scale = 1 - (progress * 0.08);
+          heroContent.style.transform = 'scale(' + scale + ') translateY(' + (-30 * progress) + 'px)';
+          if (progress > 0.6) {
+            featuredHeading.classList.add('is-visible');
+          } else {
+            featuredHeading.classList.remove('is-visible');
+          }
         }
       });
     }
